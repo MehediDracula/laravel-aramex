@@ -42,6 +42,10 @@ class ShipmentCreationResponse extends Response
     {
         parent::parse($obj);
 
+        if (! isset($obj->Shipments->ProcessedShipment)) {
+            return $this;
+        }
+
         if ($obj->Shipments->ProcessedShipment->Notifications) {
             $newNotifications = Notification::parseArray($obj->Shipments->ProcessedShipment->Notifications);
             if ($newNotifications) {
